@@ -1,4 +1,3 @@
-<% puts Redactor.configuration.options.inspect %>
 <input type="hidden" id="key" name="key" value="<%=Redactor.configuration.options["folder"]%>/${filename}">
 <input type="hidden" id="AWSAccessKeyId" name="AWSAccessKeyId" value="<%= Spree::Config.get_preference(:s3_access_key) %>">
 <input type="hidden" id="acl" name="acl" value="public-read">
