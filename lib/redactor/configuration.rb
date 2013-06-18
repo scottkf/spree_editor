@@ -11,7 +11,7 @@ module Redactor
     def self.defaults
       {
         "folder" => 'uploads',
-        "redirect" => "https://#{Spree::Config.get_preference(:site_url)}/admin/s3.json",
+        "redirect" => "http://#{Spree::Config.get_preference(:site_url)}/admin/s3",
         "uploadFields"=> {
           'key'=> '#key',
           'AWSAccessKeyId'=> '#AWSAccessKeyId',
@@ -71,7 +71,7 @@ module Redactor
       return new_with_defaults if !File.exists?(filename)
       
       options = load_yaml(filename)
-      options["imageUpload"] = "https://#{Spree::Config.get_preference(:s3_bucket)}.s3.amazonaws.com" if options.has_key?("imageUpload")
+      options["imageUpload"] = "http://#{Spree::Config.get_preference(:s3_bucket)}.s3.amazonaws.com" if options.has_key?("imageUpload")
       if options.has_key?('default')
         MultipleConfiguration.new(options)
       else
