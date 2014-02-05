@@ -1,11 +1,3 @@
-<input type="hidden" id="key" name="key" value="<%=Redactor.configuration.options["folder"]%>/${filename}">
-<input type="hidden" id="AWSAccessKeyId" name="AWSAccessKeyId" value="<%= Spree::Config.get_preference(:s3_access_key) %>">
-<input type="hidden" id="acl" name="acl" value="public-read">
-<!-- <input type="hidden" id="success_action_status" name="success_action_status" value="201"> -->
-<input type="hidden" id="success_action_redirect" name="success_action_redirect" value="<%=Redactor.configuration.options["redirect"]%>">
-<input type="hidden" id="policy" name="policy" value="<%= Redactor.configuration.s3_upload_policy_document%>">
-<input type="hidden" id="signature" name="signature" value="<%= Redactor.configuration.s3_upload_signature %>">
-<input type="hidden" id="Content-Type" name="Content-Type" value="">
 <script type="text/javascript">
   $(function() {
   	$("#<%= ids.join(',#') %>").redactor(<%= raw Redactor.configuration.options.to_json%>);
