@@ -19,14 +19,15 @@ module AwsS3Signature
   end
 
   def self.build_s3_rest_signature(secret_access_key, options = {})
-    str = build_s3_str_to_sign(options).force_encoding("UTF-8")
-    result = Base64.encode64(OpenSSL::HMAC.digest("sha1", secret_access_key, str)).strip
+    str = build_s3_str_to_sign(options).encode("UTF-8")
+    result = CGI::escape(Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::SHA1.new, secret_access_key, str)).strip)
   end
 
   def self.build_s3_upload_url(endpoint, aws_access_key, secret_access_key, signature_options = {})
-    signature = ERB::Util.url_encode(build_s3_rest_signature(secret_access_key, signature_options))
-    expires = signature_options[:date] || 1.hours.from_now.rfc822
-    "#{endpoint}?AWSAccessKeyId=#{aws_access_key}&Expires=#{expires}&Signature=#{signature}"
+    signature = build_s3_rest_signature(secret_access_key, signature_options)
+    signature = signature.gsub("+", "%20").gsub("\n", "")
+    expires = signature_options[:date] || 1.day.from_now.rfc822
+    "#{endpoint}?Signature=#{signature}&AWSAccessKeyId=#{aws_access_key}&Expires=#{expires}"
   end
 
 end

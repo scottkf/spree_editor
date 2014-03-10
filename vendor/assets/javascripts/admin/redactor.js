@@ -6282,7 +6282,7 @@
           }
           else
           {
-            // console.log(xhr);
+            console.log(xhr);
             //setProgress(0, 'Upload error: ' + xhr.status);
           }
         }, this);

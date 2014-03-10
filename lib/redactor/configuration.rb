@@ -10,7 +10,8 @@ module Redactor
     
     def self.defaults
       {
-        s3: '/admin/s3encrypt'
+        # s3: '/admin/s3encrypt'
+        imageUpload: '/admin/redactor_upload'
       }
     end
     
