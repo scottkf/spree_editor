@@ -1,6 +1,10 @@
 class Spree::Admin::RedactorController < Spree::Admin::BaseController
   protect_from_forgery :except => [:upload]
 
+  def model_class
+    Spree::Image
+  end
+
   def upload
     @image = ::Spree::Image.new(viewable: nil)
     puts params[:file].tempfile
